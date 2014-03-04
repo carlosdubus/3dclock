@@ -4,6 +4,4 @@ I made this (not very useful) 3D clock to start learning 3D programming, javascr
 
 ## Demo
 
-```
 http://tucupon.do/public/3dclock/
-```
