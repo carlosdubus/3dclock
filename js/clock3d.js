@@ -45,6 +45,22 @@ var Clock3D = function(width,height){
 
     // allow rotation and zooming with the mouse
     var controls = new THREE.OrbitControls( camera );
+    
+    
+     // plane
+    var planeWidth = 200;
+    var planeHeight = planeWidth*0.666875;
+     var geometry = new THREE.PlaneGeometry(planeWidth ,planeHeight,100,100);
+     var material = new THREE.MeshLambertMaterial( { 
+        color: 0x444444
+     } );
+     planeMesh = new THREE.Mesh( geometry, material );
+     //planeMesh.position.z=-10;
+     planeMesh.receiveShadow=true;
+     //planeMesh.castShadow=true;
+     scene.add(  planeMesh );
+
+    
     var clockMesh,planeMesh,secondsMesh;
 
     // base clock white circle
