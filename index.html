@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>Clock 3D - Three.js</title>
+        <style type="text/css">
+            canvas { width: 100%; height: 100% }
+
+            body{margin:0;}
+
+            #infobox{
+                background-color:#555;
+                border:1px solid #999;
+                font-size:10px;
+                padding:5px 10px;
+                zoom: 1;
+                color:#DDD;
+                filter: alpha(opacity=50);
+                opacity: 0.5;
+                font-family: "Courier New", Courier, monospace;
+            }
+            
+            label {
+                display: block;
+                padding-left: 15px;
+                text-indent: -15px;
+            }
+            input {
+                width: 13px;
+                height: 13px;
+                padding: 0;
+                margin:0;
+                vertical-align: bottom;
+                position: relative;
+                margin-top:3px;
+
+            }
+
+        </style>
+    </head>
+    <body>
+            <script src="js/three.min.js"></script>
+            <script src="js/OrbitControls.js"></script>
+            <script src="js/clock3d.js"></script>
+            <script>
+                (function(){
+                    // fill entire window
+                    var clock3d = new Clock3D(window.innerWidth,window.innerHeight);
+                    
+                    // set clock params to current client time
+                    var currentDate = new Date();
+                   clock3d.seconds = currentDate.getSeconds();
+                   clock3d.minutes = currentDate.getMinutes();
+                   clock3d.hours = currentDate.getHours();
+
+                    clock3d.onTimeChange = function(){
+                        clock3d.tick.volume = document.getElementById('sound-chk').checked ? 1 : 0;
+                        if(document.getElementById('time-seconds')){
+                            document.getElementById('time-seconds').innerHTML = parseInt(this.hours) + ":" + parseInt(this.minutes) + ":" + this.seconds;
+                        }
+                    }
+                    
+                    // add canvas to body
+                    document.body.appendChild(clock3d.renderer.domElement);
+                    
+                   // start clock
+                   clock3d.start();
+                })();
+            </script>
+
+            <div style="position:absolute;left:10px;top:10px;">
+                <div id="infobox">
+                    <div>Time: <span id="time-seconds"  ></span></div>
+                    <div>Hold mouse left click to rotate</div>
+                    <div>Hold mouse wheel to zoom</div>
+                    <div><label><input id="sound-chk" type="checkbox" /> Sound</label></div>
+                    
+                </div>
+            </div>    
+    </body>
+</html>
